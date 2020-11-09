@@ -1,0 +1,708 @@
+<style type="text/css">
+    
+    body {
+        background-color: #222;
+    }
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+    ::-webkit-scrollbar-track {
+        display: none;
+    }
+    ::-webkit-scrollbar-thumb {
+        display: none; 
+    }
+    .spacer {
+        font-size: 0.5em;
+    }
+    .heading {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #eee;
+    }
+    .cycletext {
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #444;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        text-align: center;
+        font-size: 0.8em;
+        color: #fff;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+    .coins {
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #444;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 0.9em;
+        color: #fff;
+        overflow-y: auto;
+    }
+    .opening, .current {
+        width: 50%;
+        background-color: #444;
+        vertical-align: top;
+        text-align: center;
+        font-size: 0.75em;
+        color: #fff;
+    }
+    .current {
+        border-left: 2px solid #666;
+    }
+    .pricetop {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: left;
+        font-size: 1.2em;
+    }
+    .pricebottom {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .pricelabel {
+        padding-top: 40px;
+    }
+    .priceamount {
+        font-size: 2.4em;
+    }
+    .pricepercent {
+        padding-bottom: 40px;
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+    .sectionlabel, .sectioncontent {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #444;
+        font-size: 0.8em;
+        color: #fff;
+    }
+    .sectionlabel {
+        border-bottom: 2px solid #666;
+        font-weight: bold;
+    }
+    .widepredcol {
+        width: 25%;
+        padding: 5px;
+        vertical-align: top;
+    }
+    .midpredcol {
+        width: 50%;
+        padding: 5px;
+        vertical-align: top;
+    }
+    .narrowpredcol {
+        width: 100%;
+        padding: 5px;
+        vertical-align: top;
+    }
+    .stakewrap {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid #222;
+        background-color: #333;
+    }
+    .input-element {
+        width: 40%;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        border: 0;
+        background-color: #333;
+        font-size: 1.2em;
+        color: #fff;
+    }
+    .staketext {
+        text-align: right;
+        color: #bbb;
+    }
+    .rise, .betw, .fall, .confirmbutton {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 1.1em;
+        cursor: pointer;
+    }
+    .rise, .rasent, .rastake {
+        background-color: green;
+    }
+    .betw, .rbsent, .rbstake {
+        background-color: black;
+    }
+    .fall, .fbsent, .fbstake {
+        background-color: red;
+    }
+    .fbsent, .rbsent, .rasent, .fbstake, .rbstake, .rastake {
+        width: 33%;
+        padding: 5px;
+        font-size: 0.2em;
+    }
+    .fbsenttext, .rbsenttext, .rasenttext, .fbstaketext, .rbstaketext, .rastaketext {
+        width: 33%;
+        text-align: center;
+    }
+    #predictionquestion {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #333;
+    }
+    .popupback {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10000;
+        background-color: #555;
+        opacity: 0.5;
+    }
+    .popup {
+        width: 70%;
+        height: 70%;
+        position: fixed;
+        top: 15%;
+        left: 15%;
+        z-index: 10001;
+        background-color: #222;
+        border: 2px solid #111;
+        color: #fff;
+    }
+    .popupclose {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        background-color: #333;
+        border-bottom: 2px solid #111;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2em;
+        cursor: pointer;
+    }
+    .confirmtitle {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #555;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #eee;
+    }
+    .confirmlabel, .confirmtext {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        vertical-align: top;
+        font-size: 0.8em;
+        color: #eee;
+    }
+    .confirmlabel {
+        width: 40%;
+        text-align: right;
+        font-weight: bold;
+    }
+    .confirmtext {
+        width: 60%;
+        text-align: left;
+    }
+    .confirmline, .confirmerror {
+        text-align: center;
+    }
+    .confirmbutton {
+        width: 80%;
+        background-color: #000;
+    }
+    .confirmerror {
+        font-size: 0.8em;
+        font-weight: bold;
+        color: red;
+    }
+    .countdowntimer {
+        width: 20%;
+        font-size: 0.85em;
+        text-align: center;
+    }
+    #days, #hours, #minutes, #seconds {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #555;
+        font-size: 1.2em;
+        border-radius: 10px;
+    }
+    .desklink {
+        padding: 7px;
+        background-color: #369;
+        border-radius: 20px;
+        font-size: 0.6em;
+        font-weight: normal;
+        cursor: pointer;
+    }
+    
+</style>
+
+<div class="heading">
+    PREDICTION DESK // WEEKLY // <span class="cycle"></span>
+    &nbsp;&nbsp;<span class="desklink" onclick="openpage('daycoin')">&nbsp;&nbsp;Open Daily Desk&nbsp;&nbsp;</span>
+    &nbsp;&nbsp;<span class="desklink" style="background-color:darkgoldenrod;" onclick="openpage('tpt')">&nbsp;&nbsp;TronPredict Token&nbsp;&nbsp;</span>
+</div>
+
+<table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td style="width:60px;vertical-align:top;">
+            <div class="coins"></div>
+        </td>
+        
+        <td style="width:8px;">&nbsp;</td>
+        
+        <td style="width:auto;vertical-align:top;">
+            <div class="cycletext"></div>
+            <div class="spacer">&nbsp;</div>
+            
+            <div class="coinpricing" style="border-bottom:2px solid #666;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td class="opening" style="border-bottom:2px solid #666;">
+                            <div class="pricetop">
+                                &nbsp;&nbsp;<span id="pricepair"></span>
+                            </div>
+                        </td>
+                        <td class="current" style="border-bottom:2px solid #666;">
+                            <div class="pricetop">
+                                &nbsp;&nbsp;<span id="coinchart"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="opening">
+                            <div class="pricelabel">
+                                THIS WEEK'S <span class="cycle"></span> OPENING PRICE
+                            </div>
+
+                            <div class="priceamount">
+                                <span id="openingprice">00.0000</span>
+                            </div>
+                        </td>
+                        <td class="current">
+                            <div class="pricelabel">
+                                CURRENT PRICE
+                            </div>
+
+                            <div class="priceamount">
+                                <span id="currentprice">00.0000</span>
+                            </div>
+
+                            <div class="pricepercent">
+                                <span id="currentpercent">0%</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="opening" style="border-top:2px solid #666;">
+                            <div class="pricebottom">
+                                <span id="openingtime">00 Mon 0000 00:00 UTC</span>
+                            </div>
+                        </td>
+                        <td class="current" style="border-top:2px solid #666;">
+                            <div class="pricebottom">
+                                <span id="currenttime">&nbsp;</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="sectionlabel">&nbsp;PREDICT THIS WEEK'S <span class="cycle"></span> CLOSING PRICE</div>
+            <div class="sectioncontent" style="text-align:center;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+                <div id="predictionsclose">
+                    <table cellpadding="0" cellspacing="5" border="0">
+                        <tr>
+                            <td class="countdowntimer" style="font-size:12px;"><b>Predictions Closing In:</b></td>
+                            <td class="countdowntimer"><b><div id="days">00</div></b></td>
+                            <td class="countdowntimer"><b><div id="hours">00</div></b></td>
+                            <td class="countdowntimer"><b><div id="minutes">00</div></b></td>
+                            <td class="countdowntimer"><b><div id="seconds">00</div></b></td>
+                        </tr>
+                        <tr>
+                            <td class="countdowntimer"></td>
+                            <td class="countdowntimer">DAYS</td>
+                            <td class="countdowntimer">HOURS</td>
+                            <td class="countdowntimer">MINUTES</td>
+                            <td class="countdowntimer">SECONDS</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="spacer">&nbsp;</div>
+                <div id="predictionquestion"></div>
+                <div class="spacer">&nbsp;</div>
+
+                <!-- +1000px screen width -->
+                <div id="widescreen" style="display:none;">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td class="widepredcol">
+                                <div class="stakewrap">
+                                    <input class="input-element" class="staketext" name="staketext" type="text" value="Stake (TRX)" disabled />
+                                    <input class="input-element" id="stakeamountwide" class="stakeamount" name="stakeamount" type="number" value="0.00" step="0.1" />
+                                </div>
+                            </td>
+                            <td class="widepredcol">
+                                <div class="fall" onclick="makeprediction(3)">
+                                    FALL BELOW (FB)<br />
+                                    <b><span class="fallprice">00.0000</span></b>
+                                </div>
+                                <div class="fbrwrdtext"></div>
+                            </td>
+                            <td class="widepredcol">
+                                <div class="betw" onclick="makeprediction(2)">
+                                    RANGE BETWEEN (RB)<br />
+                                    <b><span class="fallprice">00.0000</span></b> AND <b><span class="riseprice">00.0000</span></b>
+                                </div>
+                                <div class="rbrwrdtext"></div>
+                            </td>
+                            <td class="widepredcol">
+                                <div class="rise" onclick="makeprediction(1)">
+                                    RISE ABOVE (RA)<br />
+                                    <b><span class="riseprice">00.0000</span></b>
+                                </div>
+                                <div class="rarwrdtext"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 600px - 1000px screen width -->
+                <div id="midscreen" style="display:none;">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td class="midpredcol">
+                                <div class="stakewrap">
+                                    <input class="input-element" class="staketext" name="staketext" type="text" value="Stake (TRX)" disabled />
+                                    <input class="input-element" id="stakeamountmid" class="stakeamount" name="stakeamount" type="number" value="0.00" step="0.1" />
+                                </div>
+                            </td>
+                            <td class="midpredcol">
+                                <div class="rise" onclick="makeprediction(1)">
+                                    RISE ABOVE (RA)<br />
+                                    <b><span class="riseprice">00.0000</span></b>
+                                </div>
+                                <div class="rarwrdtext"></div>
+                                <div class="spacer">&nbsp;</div>
+                                <div class="betw" onclick="makeprediction(2)">
+                                    RANGE BETWEEN (RB)<br />
+                                    <b><span class="fallprice">00.0000</span></b> AND <b><span class="riseprice">00.0000</span></b>
+                                </div>
+                                <div class="rbrwrdtext"></div>
+                                <div class="spacer">&nbsp;</div>
+                                <div class="fall" onclick="makeprediction(3)">
+                                    FALL BELOW (FB)<br />
+                                    <b><span class="fallprice">00.0000</span></b>
+                                </div>
+                                <div class="fbrwrdtext"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 600px screen width -->
+                <div id="narrowscreen" style="display:none;">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td class="narrowpredcol">
+                                <div class="stakewrap">
+                                    <input class="input-element" class="staketext" name="staketext" type="text" value="Stake (TRX)" disabled />
+                                    <input class="input-element" id="stakeamountnarrow" class="stakeamount" name="stakeamount" type="number" value="0.00" step="0.1" />
+                                </div>
+                                <div class="spacer">&nbsp;</div>
+                                <div class="rise" onclick="makeprediction(1)">
+                                    RISE ABOVE (RA)<br />
+                                    <b><span class="riseprice">00.0000</span></b>
+                                </div>
+                                <div class="rarwrdtext"></div>
+                                <div class="spacer">&nbsp;</div>
+                                <div class="betw" onclick="makeprediction(2)">
+                                    RANGE BETWEEN (RB)<br />
+                                    <b><span class="fallprice">00.0000</span></b> AND <b><span class="riseprice">00.0000</span></b>
+                                </div>
+                                <div class="rbrwrdtext"></div>
+                                <div class="spacer">&nbsp;</div>
+                                <div class="fall" onclick="makeprediction(3)">
+                                    FALL BELOW (FB)<br />
+                                    <b><span class="fallprice">00.0000</span></b>
+                                </div>
+                                <div class="fbrwrdtext"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </td>
+        
+        <td style="width:8px;">&nbsp;</td>
+        
+        <td style="width:300px;vertical-align:top;">
+            <div class="sectionlabel" style="border-top-left-radius:10px;border-top-right-radius:10px;background-color:darkgoldenrod;border-bottom:2px solid #fff;">
+                &nbsp;MINE & EARN TRONPREDICT TOKENS
+            </div>
+            <div class="sectioncontent" style="border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-color:darkgoldenrod;">
+                &nbsp;<span id="minetext"></span>
+            </div>
+            <div class="spacer">&nbsp;</div>
+            
+            <div class="sectionlabel" style="border-top-left-radius:10px;border-top-right-radius:10px;">
+                &nbsp;THIS WEEK'S <span class="cycle"></span> SENTIMENT
+            </div>
+            <div class="sectioncontent" style="border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="width:50%;padding:2px;">
+                            &nbsp;<span style="background-color:green;">&nbsp;&nbsp;&nbsp;</span>&nbsp;RA
+                        </td>
+                        <td style="width:50%;text-align:right;padding:2px;">
+                            <b><span id="rasenttext">0%</span></b>&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;padding:2px;">
+                            &nbsp;<span style="background-color:black;">&nbsp;&nbsp;&nbsp;</span>&nbsp;RB
+                        </td>
+                        <td style="width:50%;text-align:right;padding:2px;">
+                            <b><span id="rbsenttext">0%</span></b>&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;padding:2px;">
+                            &nbsp;<span style="background-color:red;">&nbsp;&nbsp;&nbsp;</span>&nbsp;FB
+                        </td>
+                        <td style="width:50%;text-align:right;padding:2px;">
+                            <b><span id="fbsenttext">0%</span></b>&nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="spacer">&nbsp;</div>
+            
+            <div class="sectionlabel" style="border-top-left-radius:10px;border-top-right-radius:10px;">
+                &nbsp;THIS WEEK'S <span class="cycle"></span> STAKE POOL
+            </div>
+            <div class="sectioncontent" style="border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="width:50%;padding:2px;">
+                            &nbsp;<span style="background-color:green;">&nbsp;&nbsp;&nbsp;</span>&nbsp;RA
+                        </td>
+                        <td style="width:50%;text-align:right;padding:2px;">
+                            <b><span id="rastaketext">00.0000</span> TRX</b>&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;padding:2px;">
+                            &nbsp;<span style="background-color:black;">&nbsp;&nbsp;&nbsp;</span>&nbsp;RB
+                        </td>
+                        <td style="width:50%;text-align:right;padding:2px;">
+                            <b><span id="rbstaketext">00.0000</span> TRX</b>&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;padding:2px;">
+                            &nbsp;<span style="background-color:red;">&nbsp;&nbsp;&nbsp;</span>&nbsp;FB
+                        </td>
+                        <td style="width:50%;text-align:right;padding:2px;">
+                            <b><span id="fbstaketext">00.0000</span> TRX</b>&nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="spacer">&nbsp;</div>
+            
+            <div class="sectionlabel" style="border-top-left-radius:10px;border-top-right-radius:10px;">
+                &nbsp;LAST WEEK'S <span class="cycle"></span> PREDICTIONS
+            </div>
+            <div class="sectioncontent" style="border-bottom:2px solid #666;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="width:50%;padding:2px;">&nbsp;OPENING</td>
+                        <td style="width:50%;text-align:right;padding:2px;"><b><span id="yestopening">00.0000</span></b>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;padding:2px;">&nbsp;CLOSING</td>
+                        <td style="width:50%;text-align:right;padding:2px;"><b><span id="yestclosing">00.0000</span></b>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;padding:2px;">&nbsp;CHANGE</td>
+                        <td style="width:50%;text-align:right;padding:2px;"><b><span id="yestchange">0%</span></b>&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="sectioncontent" style="border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="width:30%;padding:2px;">&nbsp;PREDICTIONS</td>
+                        <td style="width:70%;text-align:right;padding:2px;"><b><span id="yestpreds"></span></b>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%;padding:2px;">&nbsp;STAKE</td>
+                        <td style="width:70%;text-align:right;padding:2px;"><b><span id="yeststake"></span></b>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%;padding:2px;">&nbsp;CORRECT</td>
+                        <td style="width:70%;text-align:right;padding:2px;"><b><span id="yestcorrect"></span></b>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%;padding:2px;">&nbsp;YIELD</td>
+                        <td style="width:70%;text-align:right;padding:2px;color:green;"><b><span id="yestroi"></span></b>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%;padding:2px;">&nbsp;MINED TPT</td>
+                        <td style="width:70%;text-align:right;padding:2px;color:green;"><b><span id="yestmined"></span></b>&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="spacer">&nbsp;</div>
+        </td>
+    </tr>
+</table>
+
+<div class="popupback" style="display:none;"></div>
+
+<!-- unsupported network -->
+<div class="popup" id="noprovider" style="display:none;">
+    <div class="popupclose">&nbsp;</div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div style="text-align:center;font-size:0.85em;">
+        [ERROR]<br /><br />Unsupported Node. Please select<br /><b>Mainnet (trongrid)</b><br />or<br /><b>Shasta Testnet</b><br />on your TronLink Wallet.
+    </div>
+</div>
+
+<!-- tronlink locked -->
+<div class="popup" id="locked" style="display:none;">
+    <div class="popupclose" onclick="tronlinkclose()"><b>&#215</b></div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div style="text-align:center;font-size:0.85em;">
+        [ERROR]<br /><br />You seem to have logged out of your TronLink Wallet...Please log in to continue.
+    </div>
+</div>
+
+<!-- confirm prediction -->
+<div class="popup" id="predconfirm" style="display:none;">
+    <div class="popupclose" onclick="popupclose()"><b>&#215</b></div>
+    <div class="confirmtitle"><span class="predictionimg"></span> YOUR PREDICTION</div>
+    <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td class="confirmlabel">Coin Pair:&nbsp;&nbsp;</td><td class="confirmtext"><div class="predictioncoinpair"></div></td>
+        </tr>
+        <tr>
+            <td class="confirmlabel">Prediction:&nbsp;&nbsp;</td><td class="confirmtext"><div class="prediction"></div></td>
+        </tr>
+        <tr>
+            <td class="confirmlabel">Stake:&nbsp;&nbsp;</td><td class="confirmtext"><div class="predictionstake"></div></td>
+        </tr>
+    </table>
+    <div style="border-top:1px solid #555;">&nbsp;</div>
+    <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td class="confirmlabel"></td><td class="confirmtext"><div class="predictionconfirm"></div></td>
+        </tr>
+    </table>
+</div>
+
+<!-- closed -->
+<div class="popup" id="predsclosed" style="display:none;">
+    <div class="confirmtitle">PREDICTIONS CLOSED FOR NOW</div>
+    <div style="padding-top:20%;text-align:center;">
+        OPENING AGAIN AT <span id="predsopentime"></span>
+    </div>
+</div>
+
+<div class="spacer">&nbsp;</div>
+<div class="spacer">&nbsp;</div>
+<div class="spacer">&nbsp;</div>
+
+<script type="text/javascript">
+    
+    var ws = screen.availWidth;
+    
+    if(ws > 1000) {
+        $('#widescreen').css('display', 'block');
+    } else if(ws < 600) {
+        $('#narrowscreen').css('display', 'block');
+    } else {
+        $('#midscreen').css('display', 'block');
+    }
+    
+    this.loadcoins().then(function(){
+        if(!sessionStorage.getItem('aznl_currcoin')) {
+            sessionStorage.setItem('aznl_currcoin', 'TRX');
+            sessionStorage.setItem('aznl_currcoinid', 11);
+            firstmakecoinactive(11,'TRX');
+        } else {
+            firstmakecoinactive(sessionStorage.getItem('aznl_currcoinid'),sessionStorage.getItem('aznl_currcoin'));
+        }
+    });
+    
+    // load coins on platform
+    async function loadcoins() {
+        var coinsobj = JSON.parse(JSON.stringify(coins));
+        var coinslen = coinsobj.length;
+
+        var listhtml = "<div class='listcoin' onclick='addccoin()' style='font-size:1.5em;'><b>&#215</b></div>";
+        var coinslist = '';
+        
+        for(var i = 0; i < coinslen; i++) {
+            var cid = coinsobj[i][0];
+            var symbol = coinsobj[i][1];
+            
+            coinslist += '<div>&nbsp;</div><div style="cursor:pointer;" onclick="makecoinactive('+cid+',\''+symbol+'\')"><img src="./images/coins/'+symbol+'.png" style="width:30px;vertical-align:middle;" /><br />'+symbol+'</div><div>&nbsp;</div>';
+        }
+        
+        $(".coins").html(coinslist);
+    }
+    
+    // first make coin active
+    function firstmakecoinactive(cid, coin) {
+        sessionStorage.setItem('aznl_currcoin', coin);
+        sessionStorage.setItem('aznl_currcoinid', cid);
+        
+        var pricepair = '<img src="./images/coins/'+coin+'.png" style="height:30px;vertical-align:middle;" /><img src="./images/coins/USDT.png" style="height:30px;vertical-align:middle;" /> '+coin+'/USDT';
+        $('#pricepair').html(pricepair);
+        
+        var coinchart = '<span style="cursor:pointer;" onclick="openchart()"><img src="images/tradeview.png" style="height:30px;vertical-align:middle;" /> Chart</span>';
+        $('#coinchart').html(coinchart);
+    }
+    
+    // make coin active
+    async function makecoinactive(cid, coin) {
+        sessionStorage.setItem('aznl_currcoin', coin);
+        sessionStorage.setItem('aznl_currcoinid', cid);
+        
+        $('#currentprice').text('00.0000');
+        $('#currentpercent').text('0%');
+        
+        var pricepair = '<img src="./images/coins/'+coin+'.png" style="height:30px;vertical-align:middle;" /><img src="./images/coins/USDT.png" style="height:30px;vertical-align:middle;" /> '+coin+'/USDT';
+        $('#pricepair').html(pricepair);
+        
+        var coinchart = '<span style="cursor:pointer;" onclick="openchart()"><img src="images/tradeview.png" style="height:30px;vertical-align:middle;" /> Chart</span>';
+        $('#coinchart').html(coinchart);
+        
+        loader();
+    }
+    
+    // open TradingView chart
+    function openchart() {
+        window.location = './coinchart.html?weekcoin';
+    }
+    
+</script>
