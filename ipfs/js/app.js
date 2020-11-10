@@ -332,9 +332,9 @@ async function loadpredictioninfo() {
         var nowstamp = Date.now();
         
         if(nowstamp < preminestamp) { // pre-mining
-            $('#minetext').html('Stake at least 50 TRX on a Prediction to Mine<br />&nbsp;and Earn at least 10 TPT Tokens');
+            $('#minetext').html('<b>MINE & EARN TRONPREDICT TOKENS:</b> Stake at least 50 TRX on a Prediction to Mine and Earn at least 10 TPT Tokens');
         } else { // mining
-            $('#minetext').html('Stake any TRX amount on a Prediction to Mine<br />&nbsp;and Earn TPT Tokens');
+            $('#minetext').html('<b>MINE & EARN TRONPREDICT TOKENS:</b> Stake any TRX amount on a Prediction to Mine and Earn TPT Tokens');
         }
     });
 }
