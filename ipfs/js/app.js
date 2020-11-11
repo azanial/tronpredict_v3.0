@@ -230,7 +230,7 @@ async function loadpredictioninfo() {
         var _closeprice = parseInt(obj.e._hex);
         var _pricehigh = parseInt(obj.f._hex);
         var _pricelow = parseInt(obj.g._hex);
-        //var _totmined = parseInt(obj.k._hex);
+        var _totmined = parseInt(obj.k._hex);
 
         if(_closeprice) {
             var yop = _openprice / 1000000;
