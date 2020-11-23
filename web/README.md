@@ -8,6 +8,7 @@ The affiliate programme enables individuals or organisations to create their own
 
 ### Main Files 
 > These files link users to TronPredict's distributed app and smart contract. Users will access via 'https://your.domain.com' to access the index.html file.
+- .htaccess
 - web.js
 - index.html
 > Update web.js file as follows. *Affiliate's Tron account public address ensures allocation of rewards to the affiliate.* **[Important]**
